@@ -39,3 +39,4 @@
 5) Membuat widget yang ada di `menu.dart` menjadi stateless widget
 6) Membuat `InfoCard` dan `ButtonCard` dengan `Icon` di `menu.dart`
 7) Mengubah tema warna aplikasi di main.dart
+

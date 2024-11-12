@@ -96,13 +96,18 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                           },
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return "tidak boleh kosong!";
+                              return "Amount tidak boleh kosong!";
                             }
-                            if (int.tryParse(value) == null) {
-                              return "harus berupa angka!";
+                            final amount = int.tryParse(value);
+                            if (amount == null) {
+                              return "Amount harus berupa angka!";
+                            }
+                            if (amount <= 0) {
+                              return "Amount harus lebih besar dari 0!";
                             }
                             return null;
                           },
+                          keyboardType: TextInputType.number,
                         ),
                       ),
                       Align(
