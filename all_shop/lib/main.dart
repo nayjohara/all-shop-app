@@ -1,5 +1,7 @@
+import 'package:all_shop/screens/login.dart';
 import 'package:flutter/material.dart';
-import 'package:all_shop/screens/menu.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,15 +12,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.light(
-          primary: Color(0xFF2A9D8F),
-          secondary: Color(0xFF2A9D8F),
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+        title: 'All Shop',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.teal,
+          ).copyWith(secondary: Colors.teal),
         ),
+        home: LoginPage(),
       ),
-      home: MyHomePage(),
     );
   }
 }
