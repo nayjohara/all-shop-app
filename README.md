@@ -81,3 +81,47 @@ Berikut adalah beberapa cara yang  digunakan:
 4. **Navigator.pushAndRemoveUntil()**: Digunakan untuk menavigasi ke halaman baru sambil menghapus semua halaman sebelumnya dari stack. Ini berguna misalnya setelah proses registrasi selesai, kita ingin langsung ke halaman utama tanpa bisa kembali ke halaman registrasi.
 
 
+# Tugas 9
+## Mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika tidak dibuat model terlebih dahulu?
+Model dibuat untuk mempermudah pengelolaan data JSON, karena model akan mengubah data menjadi bentuk yang lebih terstruktur dan mudah digunakan dalam aplikasi. Tanpa model, pengelolaan data mentah akan lebih rumit dan rentan terhadap kesalahan. Jadi, model membantu menghindari error dan membuat data lebih mudah digunakan
+
+## Jelaskan fungsi dari libarary HTTP yang sudah kamu implementasikan pada tuagas ini
+Library `http` digunakan untuk melakukan permintaan (request) ke server, seperti mengambil data dari API atau mengirim data ke server. Dengan `http`, kita dapat melakukan operasi seperti GET, POST, PUT, atau DELETE untuk berinteraksi dengan layanan web. Pada tugas ini, `http` berfungsi untuk menghubungkan aplikasi dengan backend atau sumber data eksternal, mengambil data dalam format JSON, dan menggunakannya dalam aplikasi, atau mengirim data dari aplikasi ke server.
+
+## Fungsi `CookieRequest` dan Kebutuhannya di Aplikasi Flutter
+`CookieRequest` berfungsi untuk mengelola cookie di aplikasi Flutter, terutama dalam autentikasi pengguna. Dengan `CookieRequest`, aplikasi dapat mengirim dan menerima cookie dari backend, sehingga sesi pengguna dapat dipertahankan, termasuk status login. Instance `CookieRequest` perlu dibagikan ke semua komponen dalam aplikasi agar setiap bagian dari aplikasi memiliki akses ke sesi pengguna yang sama, memungkinkan pengelolaan yang konsisten dalam interaksi pengguna, seperti login, logout, dan akses data yang terautentikasi.
+
+## Mekanisme Pengiriman Data dari Input hingga DItampilkan di Flutter
+Pertama, pengguna memasukkan data melalui aplikasi Flutter. Data ini kemudian dikirim ke backend Django menggunakan permintaan HTTP (seperti POST) dalam format JSON. Di sisi backend, Django akan memproses data yang diterima, misalnya menyimpannya ke dalam database atau melakukan validasi. Setelah diproses, Django mengembalikan data atau respon dalam format JSON yang dikirim kembali ke Flutter. Di aplikasi Flutter, data JSON ini diambil, diubah menjadi objek yang sesuai (misalnya menggunakan model), dan ditampilkan kepada pengguna di layar.
+
+## Mekanisme Autentikasi dari Login, Register, hingga Logout
+Pengguna akan memasukkan data akun (seperti username dan password) di aplikasi Flutter untuk proses registrasi atau login. Data ini dikirim ke backend Django dalam format JSON melalui permintaan HTTP. Django memproses data ini, misalnya memverifikasi data untuk login atau membuat akun baru saat registrasi. Hasil pemrosesan ini dikembalikan dalam bentuk JSON ke Flutter. Jika berhasil, aplikasi Flutter akan menampilkan menu yang sesuai dengan status pengguna, seperti halaman utama setelah login. Untuk logout, Flutter akan mengirimkan permintaan ke backend, dan sesi akan diakhiri.
+
+## Cara Implementasi Checklist Step-by-step
+1. **Membuat Aplikasi Django untuk Autentikasi:**
+   - Buat aplikasi Django baru khusus untuk fitur autentikasi (seperti registrasi, login, dan logout).
+   - Tambahkan model pengguna jika diperlukan atau gunakan model pengguna bawaan Django.
+   - Buat view untuk menangani proses registrasi, login, dan logout.
+   - Pastikan view mengembalikan respon dalam format JSON yang dapat dipahami oleh aplikasi Flutter.
+
+2. **Menghubungkan Fitur Autentikasi dengan Flutter:**
+   - Buat form di Flutter untuk input data pengguna (seperti username dan password) untuk login dan registrasi.
+   - Gunakan `http` atau `CookieRequest` untuk mengirimkan data input ke backend Django.
+   - Pastikan respon yang diterima dari backend ditangani dengan baik di Flutter, seperti menampilkan pesan sukses atau error.
+
+3. **Membuat Model JSON Kustom yang Terintegrasi dengan Flutter:**
+   - Buat model kustom di Flutter yang akan mencocokkan struktur data JSON yang diterima dari Django.
+   - Model ini akan membantu memetakan data JSON menjadi objek yang lebih mudah dikelola di aplikasi.
+
+4. **Mengintegrasikan Model dengan Form Flutter:**
+   - Gunakan model kustom yang telah dibuat untuk menangkap dan memproses data dari form di Flutter.
+   - Pastikan input pengguna diubah menjadi data JSON sesuai dengan model yang diterima di backend Django.
+
+5. **Mengambil dan Menampilkan Data dari Web:**
+   - Implementasikan fetching data di Flutter menggunakan `http` untuk mengambil data dari server.
+   - Gunakan model kustom untuk memetakan data yang diterima dari server dan menampilkannya di aplikasi Flutter.
+
+6. **Mengelola Status Pengguna:**
+   - Gunakan `CookieRequest` untuk mempertahankan status login pengguna di berbagai permintaan.
+   - Pastikan instance `CookieRequest` dibagikan ke semua komponen di aplikasi untuk menjaga sesi pengguna yang konsisten.
+
